@@ -118,11 +118,35 @@ enum Euler {
         return "\(squareOfSums - sumOfSquares)"
     }
     
-    // Project 7
+    // Project 7: 10001st prime
     static func project7() -> String {
-        return "TODO"
+        // Build array of possible prime numbers
+        var primeNumbers = [true, true]
+        for _ in 1...16 {
+            primeNumbers += primeNumbers
+        }
+        // Find all of the prime numbers
+        var maxNum = primeNumbers.count - 1
+        for i in 2..<10000 {
+            if primeNumbers[i] {
+                for j in stride(from: i * i, to: maxNum, by: i) {
+                    primeNumbers[j] = false
+                }
+            }
+        }
+        // Return the 10001st prime
+        var primeCount = 0
+        for i in 2..<maxNum {
+            if primeNumbers[i] {
+                primeCount += 1
+                if primeCount == 10001 {
+                    return "\(i)"
+                }
+            }
+        }
+        return "Project 7 failure"
     }
 }
 
-print(Euler.project6())
+print(Euler.project7())
 
