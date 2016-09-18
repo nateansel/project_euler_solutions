@@ -2,15 +2,12 @@ import PlaygroundSupport
 
 // Extensions to make my life easier
 extension String {
-    
     private subscript (i: Int) -> Character {
         return self[index(startIndex, offsetBy: i)]
     }
-    
     subscript (i: Int) -> String {
         return String(self[i] as Character)
     }
-    
     subscript (r: Range<Int>) -> String {
         let start = index(startIndex, offsetBy: r.lowerBound)
         let end = index(start, offsetBy: r.upperBound - r.lowerBound)
@@ -184,6 +181,22 @@ enum Euler {
         }
         return "\(maxProduct)"
     }
+    
+    // Project 9: Pythagorean triplet
+    static func project9() -> String {
+        //var a = 0
+        //var b = 0
+        var c = Float(0)
+        for a in 1..<1000 {
+            for b in 1..<(1000 - a) {
+                c = Float(1000 - b - a)
+                if Float((a * a) + (b * b)).squareRoot() == c {
+                    return "\(a * b * Int(c))"
+                }
+            }
+        }
+        return "Project 9 failure"
+    }
 }
 
-print(Euler.project8())
+print(Euler.project9())
